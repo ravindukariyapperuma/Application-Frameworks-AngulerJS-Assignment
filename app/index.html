@@ -1,0 +1,93 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Online Organizer</title>
+
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
+
+</head>
+<div ng-app="ToDoList">
+
+  <div ng-controller="MainController">
+    <div class="container">
+
+      <br>
+      <div class="row" style="background: #00BFFF">
+        <div class="col-md-5" style="text-align: right;">
+         <br> <img src="logo.png" width="25%"> <br>
+        </div>
+        <div class="col-md-5"> <br>
+          <h1>Online Organizer</h1>
+          <p><b><font color="#8b0000">IT18121766<br>Kariyapperuma.K.A.D.R.L<br>Y3S1.09.2 (SE)</font></b></p> <br>
+        </div>
+      </div>
+
+      <div style="text-align: center;">
+        <div class="row" style="background:#F9DBCF;">
+          <div class="countdown" ng-controller="TimeController" ng-if="list.length > 0">
+            &nbsp; <i class="fa fa-bell"></i> Remaining for Last Event:<font color="#3E1C97"><b> {{rDays}} </b></font>days <font color="#3E1C97"><b>{{rHours}}</b></font> hours <font color="#3E1C97"><b>{{rMinutes}}</b></font> minutes <font color="#3E1C97"><b>{{rSeconds}}</b></font> seconds
+          </div>
+        </div>
+      </div>
+
+      <div class="row" style="background:#E6EFFA">
+        <div class="col-md-5"> <br>
+          <h2 align="left">Add Event</h2>
+            <input type="hidden" class="form-control" ng-model="EventIndex">
+            <input type="text" placeholder="Enter Event Name" class="form-control" ng-model="EventName"> <br>
+            <input type="datetime-local" class="form-control" ng-model="addTime" onchange="console.log(this.value.split('T')[0]);">
+
+
+<!--            <input type="text" class="form-control" datetime-picker="MM/dd/yyyy HH:mm" ng-model="ctrl.picker3.date" is-open="ctrl.picker3.open" />-->
+<!--            <span class="input-group-btn">-->
+<!--                  <button type="button" class="btn btn-default" ng-click="ctrl.openCalendar($event, 'picker3')"><i class="fa fa-calendar"></i></button>-->
+<!--              </span>-->
+
+
+            <p align="left">
+              <br>
+              <button type="button" class="btn btn-primary" ng-click="addEvent()"><i class="fa fa-star fa-spin fa-lg"></i> &nbsp;Add Event</button> &nbsp;
+              <button type="button" class="btn btn-success" ng-click="UpdateEvent()"><i class="fa fa-pencil-alt"></i> Update Event</button>
+            </p> <br>
+        </div>
+        <div class="col"> <br>
+          <h2 align="left">Items List</h2>
+          <div class="row">
+            <div class="col-md-8">
+              <input type="text" placeholder="Search" class="form-control" ng-model="searchText">
+            </div>
+          </div> <br>
+          <div style="margin-left: 30px">
+            <table id="searchTextResults" border="1" width="100%" style="text-align: center;">
+              <tr ng-repeat="x in list | filter:searchText" bgcolor="#e6ccff">
+                <td width="10%" bgcolor="#ffffff"><input type="checkbox" ng-model="x.done" ></td> <td width="35%"><span ng-bind="x.event"></span></td> <td width="40%"><span ng-bind="x.time"></span></td>
+                <td width="10%"><button type="button" class="btn btn-outline-danger btn-sm" ng-click="Update(x)"><i class="fa fa-edit"></i> Edit</button></td>
+              </tr>
+            </table>
+            <br>
+          </div>
+            <button type="button" class="btn btn-danger btn-sm" id="rmvMe" ng-click="removeEvent()"> <i class="fa fa-trash"></i> Delete Event</button> <hr>
+        </div>
+      </div>
+      <div style="background: #00BFFF">
+        <br>
+      </div>
+    </div>
+    </div>
+  </div>
+
+    <script src="lib/angular/angular.js"></script>
+    <script src="lib/angular-route/angular-route.js"></script>
+    <script src="app.js"></script>
+    <script src="contrllers/MainController.js"></script>
+    <script src="core/version/version.js"></script>
+    <script src="core/version/version-directive.js"></script>
+    <script src="core/version/interpolate-filter.js"></script>
+
+</body>
+</html>
